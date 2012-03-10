@@ -28,18 +28,18 @@ public class Receiver implements Runnable {
 			//edge condition, for first - id should be zero
 			//also remove the element which has been added to delivered list from buffer
 			//lets shuffle this data to preserve random order in incoming content
-			Collections.shuffle((List)msgContainer.receivingQueue);
-			
-			if(msgContainer.receivingQueue.size()>0){
+			Collections.shuffle((List)msgContainer.receieveQueueOP(MesssageContainer.QUEUE_OPERATION.SHUFFLE, null));
+			List<Message> msgList = msgContainer.receieveQueueOP(MesssageContainer.QUEUE_OPERATION.FETCH, null);
+			if(msgList.size()>0){
 				//iterate through the list
-				for(Message msg: msgContainer.receivingQueue){
+				for(Message msg: msgList){
 					System.out.println("### Buffered message:" + msg + "@" + msgContainer.sequence);
 					if(receivedData.size()==0){
 						//if this is the first message we received
 						if(msg.getId()==0){
 							receivedData.add(msg);
 							System.out.println("### received message:" + msg + "@" + msgContainer.sequence);
-							msgContainer.receivingQueue.remove(msg);
+							msgContainer.receieveQueueOP(MesssageContainer.QUEUE_OPERATION.REMOVE, msg);
 							break;
 						}
 					}else{
@@ -47,7 +47,7 @@ public class Receiver implements Runnable {
 						if(msg.getId() == (receivedData.get(receivedData.size()-1).getId() + 1)){
 							receivedData.add(msg);
 							System.out.println("### received message:" + msg + "@" + msgContainer.sequence);
-							msgContainer.receivingQueue.remove(msg);
+							msgContainer.receieveQueueOP(MesssageContainer.QUEUE_OPERATION.REMOVE, msg);
 							break;
 						}
 					}

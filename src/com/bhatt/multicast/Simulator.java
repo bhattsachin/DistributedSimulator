@@ -33,7 +33,7 @@ public class Simulator {
 			if (myId != i) {
 				MessengerNode node = messengerMap.get(String.valueOf(i));
 				// simulate the network that message is received here
-				node.msgContainer.receivingQueue.add(msg);
+				node.msgContainer.receieveQueueOP(MesssageContainer.QUEUE_OPERATION.INSERT, msg);
 			}
 		}
 
