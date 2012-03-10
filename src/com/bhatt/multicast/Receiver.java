@@ -1,6 +1,7 @@
 package com.bhatt.multicast;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -26,6 +27,9 @@ public class Receiver implements Runnable {
 			//then check if any value is next in sequence of what is present in receivedData
 			//edge condition, for first - id should be zero
 			//also remove the element which has been added to delivered list from buffer
+			//lets shuffle this data to preserve random order in incoming content
+			Collections.shuffle((List)msgContainer.receivingQueue);
+			
 			if(msgContainer.receivingQueue.size()>0){
 				//iterate through the list
 				for(Message msg: msgContainer.receivingQueue){
@@ -53,7 +57,7 @@ public class Receiver implements Runnable {
 			
 			try {
 				System.out.println("receiver sleeping");
-				Thread.sleep(3000);
+				Thread.sleep(1000 * (int)(Math.random()*6));
 			} catch (InterruptedException ex) {
 				ex.printStackTrace();
 			}

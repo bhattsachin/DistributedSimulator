@@ -21,15 +21,16 @@ public class Sender implements Runnable {
 			if (!this.msgContainer.sendingQueue.isEmpty()) {
 				System.out.println("-- sending message:("+this.msgContainer.sendingQueue.peek().getId()+
 						"/" + (MesssageContainer.numberOfMessages-1) + " ~~~~~~"
-						+ this.msgContainer.sendingQueue.peek());
+						+ this.msgContainer.sendingQueue.peek() + " @" + this.msgContainer.sequence);
 				Simulator.sendMessage(this.msgContainer.sequence,
 						this.msgContainer.sendingQueue.poll());
 				
 			}
 
 			try {
-				System.out.println("sender sleeping");
-				Thread.sleep(2000);
+				System.out.println("sender sleeping @" + this.msgContainer.sequence);
+				//sleep for a random time between 0-6 seconds
+				Thread.sleep(1000 * (int)(Math.random()*6));
 			} catch (InterruptedException ex) {
 				ex.printStackTrace();
 			}
