@@ -29,7 +29,7 @@ public class MesssageContainer {
 	
 	public void init(){
 		for(int i=0;i<MesssageContainer.numberOfMessages;i++){
-			sendingQueue.add(new Message(i,i+"  Message of " + this.sequence));
+			sendingQueue.add(new Message(i,i+"  Message of " + this.sequence, this.sequence));
 		}
 	}
 	
@@ -48,6 +48,7 @@ public class MesssageContainer {
 					Collections.copy(msgList, (List)receivingQueue);
 					break;
 		case REMOVE: receivingQueue.remove(msg);
+					break;
 					
 		}
 		

@@ -6,7 +6,7 @@ import java.util.Map;
 public class Simulator {
 
 	//total number of nodes for this simulation
-	public static int numberOfNodes = 2;
+	public static int numberOfNodes = 3;
 
 	public static Map<String, MessengerNode> messengerMap = new HashMap<String, MessengerNode>();
 

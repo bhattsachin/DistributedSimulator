@@ -6,14 +6,16 @@ public class Message {
 	//sequence number it can hold
 	private long id;
 	private String message;
+	private int sender;
 	
 	public Message(){
 		
 	}
 	
-	public Message(long id, String message){
+	public Message(long id, String message, int sender){
 		this.id = id;
 		this.message = message;
+		this.sender = sender;
 	}
 	
 	public long getId() {
@@ -29,10 +31,21 @@ public class Message {
 		this.message = message;
 	}
 
+	public int getSender() {
+		return sender;
+	}
+
+	public void setSender(int sender) {
+		this.sender = sender;
+	}
+
 	@Override
 	public String toString() {
-		return "Message [id=" + id + ", message=" + message + "]";
+		return "Message [id=" + id + ", message=" + message + ", sender="
+				+ sender + "]";
 	}
 	
+	
+
 	
 }
